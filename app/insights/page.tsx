@@ -1,3 +1,5 @@
+import BottomNav from "../components/BottomNav";
+
 export default function Insights() {
   const categories = [
     { name: "Groceries", amount: 187, percentage: 15, icon: "🛒", color: "bg-green-500" },
@@ -20,13 +22,11 @@ export default function Insights() {
   return (
     <main className="min-h-screen bg-gray-950">
 
-      {/* Header */}
       <div className="bg-gray-900 border-b border-gray-800 px-4 py-4">
         <h1 className="text-lg font-medium text-white">Insights</h1>
         <p className="text-sm text-gray-400">May 2025</p>
       </div>
 
-      {/* Spending trend chart */}
       <div className="mx-4 mt-4 bg-gray-900 rounded-2xl border border-gray-800 p-4">
         <h2 className="text-sm font-medium text-white mb-4">Monthly spending</h2>
         <div className="flex items-end gap-2 h-32">
@@ -43,7 +43,6 @@ export default function Insights() {
         </div>
       </div>
 
-      {/* AI insight card */}
       <div className="mx-4 mt-4 bg-blue-950 rounded-2xl border border-blue-900 p-4">
         <div className="flex items-start gap-3">
           <span className="text-xl shrink-0">💡</span>
@@ -56,7 +55,6 @@ export default function Insights() {
         </div>
       </div>
 
-      {/* Category breakdown */}
       <div className="mx-4 mt-4">
         <h2 className="text-sm font-medium text-white mb-3">Spending by category</h2>
         <div className="bg-gray-900 rounded-2xl border border-gray-800 divide-y divide-gray-800">
@@ -82,7 +80,6 @@ export default function Insights() {
         </div>
       </div>
 
-      {/* Month over month */}
       <div className="mx-4 mt-4 mb-24">
         <h2 className="text-sm font-medium text-white mb-3">Month over month</h2>
         <div className="grid grid-cols-2 gap-3">
@@ -99,29 +96,7 @@ export default function Insights() {
         </div>
       </div>
 
-      {/* Bottom nav */}
-      <div className="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-800 flex justify-around py-3 px-4">
-        <div className="flex flex-col items-center gap-1 cursor-pointer">
-          <span className="text-xl">🏠</span>
-          <span className="text-xs text-gray-500">Home</span>
-        </div>
-        <div className="flex flex-col items-center gap-1 cursor-pointer">
-          <span className="text-xl">📋</span>
-          <span className="text-xs text-gray-500">Transactions</span>
-        </div>
-        <div className="flex flex-col items-center gap-1 cursor-pointer">
-          <span className="text-xl">💬</span>
-          <span className="text-xs text-gray-500">Chat</span>
-        </div>
-        <div className="flex flex-col items-center gap-1 cursor-pointer">
-          <span className="text-xl">📊</span>
-          <span className="text-xs text-blue-400">Insights</span>
-        </div>
-        <div className="flex flex-col items-center gap-1 cursor-pointer">
-          <span className="text-xl">⚙️</span>
-          <span className="text-xs text-gray-500">Settings</span>
-        </div>
-      </div>
+      <BottomNav />
 
     </main>
   );

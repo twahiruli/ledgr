@@ -1,3 +1,5 @@
+import BottomNav from "../components/BottomNav";
+
 export default function Transactions() {
   const transactions = [
     { id: 1, name: "Tesco Express", category: "Groceries", date: "Today", amount: -23.40, icon: "🛒" },
@@ -15,13 +17,11 @@ export default function Transactions() {
   return (
     <main className="min-h-screen bg-gray-950">
 
-      {/* Header */}
       <div className="bg-gray-900 border-b border-gray-800 px-4 py-4">
         <h1 className="text-lg font-medium text-white">Transactions</h1>
         <p className="text-sm text-gray-400">May 2025</p>
       </div>
 
-      {/* Search bar */}
       <div className="mx-4 mt-4">
         <input
           type="text"
@@ -30,7 +30,6 @@ export default function Transactions() {
         />
       </div>
 
-      {/* Filter pills */}
       <div className="flex gap-2 px-4 mt-3 overflow-x-auto pb-1">
         {["All", "Groceries", "Eating out", "Transport", "Subscriptions", "Shopping"].map((filter) => (
           <button
@@ -46,7 +45,6 @@ export default function Transactions() {
         ))}
       </div>
 
-      {/* Transaction list */}
       <div className="mx-4 mt-4 bg-gray-900 rounded-2xl border border-gray-800 divide-y divide-gray-800 mb-24">
         {transactions.map((tx) => (
           <div key={tx.id} className="flex items-center gap-3 p-4">
@@ -64,29 +62,7 @@ export default function Transactions() {
         ))}
       </div>
 
-      {/* Bottom nav */}
-      <div className="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-800 flex justify-around py-3 px-4">
-        <div className="flex flex-col items-center gap-1 cursor-pointer">
-          <span className="text-xl">🏠</span>
-          <span className="text-xs text-gray-500">Home</span>
-        </div>
-        <div className="flex flex-col items-center gap-1 cursor-pointer">
-          <span className="text-xl">📋</span>
-          <span className="text-xs text-blue-400">Transactions</span>
-        </div>
-        <div className="flex flex-col items-center gap-1 cursor-pointer">
-          <span className="text-xl">💬</span>
-          <span className="text-xs text-gray-500">Chat</span>
-        </div>
-        <div className="flex flex-col items-center gap-1 cursor-pointer">
-          <span className="text-xl">📊</span>
-          <span className="text-xs text-gray-500">Insights</span>
-        </div>
-        <div className="flex flex-col items-center gap-1 cursor-pointer">
-          <span className="text-xl">⚙️</span>
-          <span className="text-xs text-gray-500">Settings</span>
-        </div>
-      </div>
+      <BottomNav />
 
     </main>
   );

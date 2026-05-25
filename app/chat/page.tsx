@@ -1,3 +1,5 @@
+import BottomNav from "../components/BottomNav";
+
 export default function Chat() {
   const messages = [
     {
@@ -37,15 +39,12 @@ export default function Chat() {
   return (
     <main className="min-h-screen bg-gray-950 flex flex-col">
 
-      {/* Header */}
       <div className="bg-gray-900 border-b border-gray-800 px-4 py-4 shrink-0">
         <h1 className="text-lg font-medium text-white">Ask Ledgr</h1>
         <p className="text-sm text-gray-400">Powered by AI</p>
       </div>
 
-      {/* Messages */}
       <div className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-3 mb-48">
-
         {messages.map((message) => (
           <div
             key={message.id}
@@ -62,10 +61,8 @@ export default function Chat() {
             </div>
           </div>
         ))}
-
       </div>
 
-      {/* Suggested prompts */}
       <div className="fixed bottom-20 left-0 right-0 px-4 mb-2">
         <div className="flex gap-2 overflow-x-auto pb-2">
           {suggestions.map((suggestion) => (
@@ -79,7 +76,6 @@ export default function Chat() {
         </div>
       </div>
 
-      {/* Input bar */}
       <div className="fixed bottom-16 left-0 right-0 bg-gray-900 border-t border-gray-800 px-4 py-3">
         <div className="flex gap-2 items-center">
           <input
@@ -93,29 +89,7 @@ export default function Chat() {
         </div>
       </div>
 
-      {/* Bottom nav */}
-      <div className="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-800 flex justify-around py-3 px-4">
-        <div className="flex flex-col items-center gap-1 cursor-pointer">
-          <span className="text-xl">🏠</span>
-          <span className="text-xs text-gray-500">Home</span>
-        </div>
-        <div className="flex flex-col items-center gap-1 cursor-pointer">
-          <span className="text-xl">📋</span>
-          <span className="text-xs text-gray-500">Transactions</span>
-        </div>
-        <div className="flex flex-col items-center gap-1 cursor-pointer">
-          <span className="text-xl">💬</span>
-          <span className="text-xs text-blue-400">Chat</span>
-        </div>
-        <div className="flex flex-col items-center gap-1 cursor-pointer">
-          <span className="text-xl">📊</span>
-          <span className="text-xs text-gray-500">Insights</span>
-        </div>
-        <div className="flex flex-col items-center gap-1 cursor-pointer">
-          <span className="text-xl">⚙️</span>
-          <span className="text-xs text-gray-500">Settings</span>
-        </div>
-      </div>
+      <BottomNav />
 
     </main>
   );

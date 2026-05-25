@@ -1,3 +1,5 @@
+import BottomNav from "../components/BottomNav";
+
 export default function Dashboard() {
   return (
     <main className="min-h-screen bg-gray-950">
@@ -129,29 +131,7 @@ export default function Dashboard() {
         </button>
       </div>
 
-      {/* Bottom nav */}
-      <div className="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-800 flex justify-around py-3 px-4">
-        <div className="flex flex-col items-center gap-1 cursor-pointer">
-          <span className="text-xl">🏠</span>
-          <span className="text-xs text-blue-400">Home</span>
-        </div>
-        <div className="flex flex-col items-center gap-1 cursor-pointer">
-          <span className="text-xl">📋</span>
-          <span className="text-xs text-gray-500">Transactions</span>
-        </div>
-        <div className="flex flex-col items-center gap-1 cursor-pointer">
-          <span className="text-xl">💬</span>
-          <span className="text-xs text-gray-500">Chat</span>
-        </div>
-        <div className="flex flex-col items-center gap-1 cursor-pointer">
-          <span className="text-xl">📊</span>
-          <span className="text-xs text-gray-500">Insights</span>
-        </div>
-        <div className="flex flex-col items-center gap-1 cursor-pointer">
-          <span className="text-xl">⚙️</span>
-          <span className="text-xs text-gray-500">Settings</span>
-        </div>
-      </div>
+      <BottomNav />
 
     </main>
   );
