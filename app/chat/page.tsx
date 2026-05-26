@@ -1,33 +1,18 @@
+"use client";
+
+import { useState } from "react";
 import BottomNav from "../components/BottomNav";
 
 export default function Chat() {
-  const messages = [
+  const [messages, setMessages] = useState([
     {
       id: 1,
       role: "ai",
       text: "Hi James! I can answer any questions about your finances. What would you like to know?",
     },
-    {
-      id: 2,
-      role: "user",
-      text: "How much did I spend on eating out this month?",
-    },
-    {
-      id: 3,
-      role: "ai",
-      text: "You've spent £148 on eating out this month across 6 transactions. That's £28 over your £120 budget. Your biggest expense was Dishoom at £47.",
-    },
-    {
-      id: 4,
-      role: "user",
-      text: "What about groceries?",
-    },
-    {
-      id: 5,
-      role: "ai",
-      text: "You've spent £187 on groceries this month — £63 under your £250 budget. You're on track! Most of that was Tesco (£23) and Sainsbury's (£54).",
-    },
-  ];
+  ]);
+  const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const suggestions = [
     "Where did I overspend this month?",
@@ -35,6 +20,40 @@ export default function Chat() {
     "How much have I saved?",
     "Any unusual transactions?",
   ];
+
+  async function sendMessage(text: string) {
+    if (!text.trim()) return;
+
+    const userMessage = { id: messages.length + 1, role: "user", text };
+    setMessages((prev) => [...prev, userMessage]);
+    setInput("");
+    setLoading(true);
+
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: text }),
+      });
+
+      const data = await response.json();
+
+      const aiMessage = {
+        id: messages.length + 2,
+        role: "ai",
+        text: data.reply || "Sorry, I couldn't get a response.",
+      };
+
+      setMessages((prev) => [...prev, aiMessage]);
+    } catch {
+      setMessages((prev) => [
+        ...prev,
+        { id: messages.length + 2, role: "ai", text: "Something went wrong. Please try again." },
+      ]);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <main className="min-h-screen bg-gray-950 flex flex-col">
@@ -61,6 +80,14 @@ export default function Chat() {
             </div>
           </div>
         ))}
+
+        {loading && (
+          <div className="flex justify-start">
+            <div className="bg-gray-800 rounded-2xl rounded-bl-sm px-4 py-3">
+              <span className="text-gray-400 text-sm">Thinking...</span>
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="fixed bottom-20 left-0 right-0 px-4 mb-2">
@@ -68,6 +95,7 @@ export default function Chat() {
           {suggestions.map((suggestion) => (
             <button
               key={suggestion}
+              onClick={() => sendMessage(suggestion)}
               className="shrink-0 bg-gray-800 border border-gray-700 text-gray-300 text-xs rounded-full px-3 py-2 hover:bg-gray-700 transition-colors"
             >
               {suggestion}
@@ -80,10 +108,16 @@ export default function Chat() {
         <div className="flex gap-2 items-center">
           <input
             type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && sendMessage(input)}
             placeholder="Ask anything about your finances..."
             className="flex-1 bg-gray-800 border border-gray-700 rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-500 outline-none focus:border-gray-500"
           />
-          <button className="w-9 h-9 bg-blue-600 rounded-xl flex items-center justify-center shrink-0 hover:bg-blue-500 transition-colors">
+          <button
+            onClick={() => sendMessage(input)}
+            className="w-9 h-9 bg-blue-600 rounded-xl flex items-center justify-center shrink-0 hover:bg-blue-500 transition-colors"
+          >
             <span className="text-white text-base">↑</span>
           </button>
         </div>
